@@ -7,6 +7,7 @@ import Cart from "../components/Cart";
 import Test from "../components/Test";
 import NavBar from "../components/NavBar";
 import ShippingForm from "../forms/ShippingForm";
+import Users from "../components/Users";
 
 function AppNavigator() {
   const [data, setData] = useState([]);
@@ -16,6 +17,9 @@ function AppNavigator() {
   return (
     <Router>
       <Switch>
+        <Route exact path="/Users">
+          <Users />
+        </Route>
         <Route exact path="/Test">
           <Test />
         </Route>
