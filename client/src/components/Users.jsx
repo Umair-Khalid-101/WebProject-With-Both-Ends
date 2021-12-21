@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { useFetch } from "../hook/useFetch";
 import Navbar from "./NavBar";
 import { useHistory } from "react-router";
 
-const url = "http://localhost:3001/users";
+const url = "http://localhost:3001/app/users";
 
 const Test = () => {
   const { loading, products } = useFetch(url);
@@ -62,7 +62,7 @@ const Test = () => {
         </div>
         <div className="text-center">
           <div
-            className="btn btn-primary mt-5"
+            className="btn btn-primary mt-5 mb-5"
             onClick={() => history.push("/")}
           >
             Go to Home

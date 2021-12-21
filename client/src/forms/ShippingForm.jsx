@@ -1,7 +1,7 @@
 import { Formik, Form } from "formik";
 import { TextField } from "./TextField";
 import * as Yup from "yup";
-import { useHistory } from "react-router";
+// import { useHistory } from "react-router";
 import Navbar from "../components/NavBar";
 import Footer from "../components/Footer";
 
@@ -13,7 +13,7 @@ const validation = Yup.object().shape({
 });
 
 function ShippingForm() {
-  const history = useHistory();
+  // const history = useHistory();
   return (
     <>
       <Navbar />

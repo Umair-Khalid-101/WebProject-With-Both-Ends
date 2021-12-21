@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { useFetch } from "../hook/useFetch";
 import Navbar from "./NavBar";
 import Badge from "@material-ui/core/Badge";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Footer from "./Footer";
+import axios from "axios";
 
 const url = "https://fakestoreapi.com/products";
 
@@ -18,6 +19,20 @@ function Products({
   const history = useHistory();
   const [readMore, setReadMore] = useState(false);
   const { loading, products } = useFetch(url);
+  const [users, setUsers] = useState();
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  const getUsers = async () => {
+    const response = await axios.get("http://localhost:3001/app/users");
+    if (response.status === 200) {
+      setUsers(response.data);
+    }
+  };
+
+  console.log(users);
 
   if (loading) {
     return (
@@ -62,7 +77,9 @@ function Products({
                 <div className="col container-fluid mt-4 ms-4">
                   <div
                     className="card"
-                    style={{ width: "17rem" }}>
+                    style={{ width: "17rem" }}
+                    key={person.id}
+                  >
                     <div className="text-center mt-4 mb-4">
                       <img
                         src={person.image}
@@ -99,6 +116,12 @@ function Products({
                             temp.push(person);
                             handleStateChange(temp);
                             setCounter(counter + 1);
+                            axios
+                              .post(
+                                "http://localhost:3001/app/Products",
+                                person
+                              )
+                              .then((response) => console.log(response.data));
                           }}
                         >
                           Add to Cart

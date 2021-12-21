@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const routesUrls = require("./routes/routes");
 const cors = require("cors");
-const Users = require("./models/SignUpModel");
 
 dotenv.config();
 
@@ -19,9 +18,3 @@ app.use(cors());
 app.use("/app", routesUrls);
 
 app.listen(3001, () => console.log("server is up and running"));
-
-app.get("/users", function (req, res) {
-  Users.find().then((data) => {
-    res.json(data);
-  });
-});

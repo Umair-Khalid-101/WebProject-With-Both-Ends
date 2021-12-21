@@ -5,7 +5,7 @@ import { useHistory } from "react-router";
 import Navbar from "../components/NavBar";
 import Footer from "../components/Footer";
 import axios from "axios";
-import React, { useState } from "react";
+import React from "react";
 
 const validation = Yup.object().shape({
   firstName: Yup.string()
@@ -26,7 +26,6 @@ const validation = Yup.object().shape({
 
 function SignUp({ handleStateChange, data }) {
   const history = useHistory();
-  const [user, setUser] = useState([]);
   return (
     <>
       <Navbar />
@@ -47,11 +46,10 @@ function SignUp({ handleStateChange, data }) {
               //   const temp = [...data];
               //   temp.push(values);
               console.log(values);
-              setUser(values);
               //   handleStateChange(temp);
-              //   history.push("/Products");
+              history.push("/Users");
               axios
-                .post("http://localhost:3001/app/SignUp", user)
+                .post("http://localhost:3001/app/SignUp", values)
                 .then((response) => console.log(response.data));
             }}
           >
