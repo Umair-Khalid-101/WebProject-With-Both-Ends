@@ -2,6 +2,7 @@ import React from "react";
 import { useFetch } from "../hook/useFetch";
 import Navbar from "./NavBar";
 import { useHistory } from "react-router";
+import axios from "axios";
 
 const url = "http://localhost:3001/app/users";
 
@@ -9,6 +10,22 @@ const Test = () => {
   const { loading, products } = useFetch(url);
   const history = useHistory();
   let counter = 0;
+
+  const onDelete = (id) => {
+    axios
+      .delete(`http://localhost:3001/app/User/${id}`)
+      .then((res) => {
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const onUpdate = (id) => {
+    alert(id);
+  };
+
   if (loading) {
     return (
       <>
@@ -51,6 +68,24 @@ const Test = () => {
                         </li>
                         <li className="list-group-item fs-6">
                           Password: {user.password}
+                        </li>
+                        <li className="list-group-item fs-6">
+                          <button
+                            className="btn btn-danger"
+                            onClick={() => {
+                              onDelete(user._id);
+                            }}
+                          >
+                            Delete
+                          </button>
+                          <button
+                            className="btn btn-primary ms-4"
+                            onClick={() => {
+                              onUpdate(user._id);
+                            }}
+                          >
+                            Update
+                          </button>
                         </li>
                       </ul>
                     </div>

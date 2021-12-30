@@ -47,10 +47,11 @@ function SignUp({ handleStateChange, data }) {
               //   temp.push(values);
               console.log(values);
               //   handleStateChange(temp);
-              history.push("/Users");
+              // history.push("/Products");
               axios
                 .post("http://localhost:3001/app/SignUp", values)
                 .then((response) => console.log(response.data));
+                 window.location.reload();
             }}
           >
             <Form>

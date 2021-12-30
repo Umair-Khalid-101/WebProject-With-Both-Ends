@@ -1,3 +1,5 @@
+const morgan = require("morgan");
+const helmet = require("helmet");
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -12,7 +14,8 @@ mongoose.connect(process.env.DATABASE_ACCESS, () =>
 );
 
 app.use(express.json());
-
+// app.use(morgan("tiny"));
+// app.use(helmet());
 app.use(cors());
 
 app.use("/app", routesUrls);
