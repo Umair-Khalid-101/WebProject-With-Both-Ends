@@ -1,8 +1,9 @@
 import React from "react";
 import { useFetch } from "../hook/useFetch";
-import Navbar from "./NavBar";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 import axios from "axios";
+import Navbar from "../components/NavBar";
 
 const url = "http://localhost:3001/app/users";
 
@@ -20,10 +21,6 @@ const Test = () => {
       .catch((error) => {
         console.log(error);
       });
-  };
-
-  const onUpdate = (id) => {
-    alert(id);
   };
 
   if (loading) {
@@ -50,7 +47,7 @@ const Test = () => {
             counter = counter + 1;
             return (
               <>
-                <div className="col-3 container mt-4 ms-4">
+                <div className="col-3 container mt-4 ms-4 me-4">
                   <div key={user._id}>
                     <div className="card" style={{ width: "18rem" }}>
                       <ul className="list-group list-group-flush">
@@ -78,14 +75,11 @@ const Test = () => {
                           >
                             Delete
                           </button>
-                          <button
-                            className="btn btn-primary ms-4"
-                            onClick={() => {
-                              onUpdate(user._id);
-                            }}
-                          >
-                            Update
-                          </button>
+                          <Link to={`/UpdateUser/${user._id}`}>
+                            <button className="btn btn-primary ms-4">
+                              Update
+                            </button>
+                          </Link>
                         </li>
                       </ul>
                     </div>

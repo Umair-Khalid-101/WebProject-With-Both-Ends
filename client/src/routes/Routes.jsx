@@ -1,15 +1,17 @@
 import { useState } from "react";
-import Home from "../components/Home";
-import SignUp from "../forms/SignUp";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Products from "../components/Products";
-import Cart from "../components/Cart";
+import Home from "../pages/Home";
+import SignUp from "../forms/SignUp";
+import Products from "../pages/Products";
+import Cart from "../pages/Cart";
 import Test from "../components/Test";
 import NavBar from "../components/NavBar";
 import ShippingForm from "../forms/ShippingForm";
-import Users from "../components/Users";
-
-function AppNavigator() {
+import Users from "../pages/Users";
+import UpdateUser from "../pages/UpdateUser";
+import Login from "../forms/Login";
+import Success from "../pages/Success";
+function Routes() {
   const [data, setData] = useState([]);
   const [productData, setProductData] = useState([]);
   const [counter, setCounter] = useState(0);
@@ -17,11 +19,20 @@ function AppNavigator() {
   return (
     <Router>
       <Switch>
+        <Route exact path="/Success/:id">
+          <Success />
+        </Route>
+        <Route exact path="/UpdateUser/:id">
+          <UpdateUser />
+        </Route>
         <Route exact path="/Users">
           <Users />
         </Route>
         <Route exact path="/Test">
           <Test />
+        </Route>
+        <Route exact path="/Login">
+          <Login />
         </Route>
         <Route exact path="/ShippingForm">
           <ShippingForm />
@@ -70,4 +81,4 @@ function AppNavigator() {
   );
 }
 
-export default AppNavigator;
+export default Routes;

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { useFetch } from "../hook/useFetch";
-import Navbar from "./NavBar";
 import Badge from "@material-ui/core/Badge";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import Footer from "./Footer";
 import axios from "axios";
+import Navbar from "../components/NavBar";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import Footer from "../components/Footer";
 
 const url = "https://fakestoreapi.com/products";
 

@@ -1,9 +1,9 @@
 import React from "react";
-import Navbar from "./NavBar";
+import Navbar from "../components/NavBar";
+import Section from "../components/Section";
+import Footer from "../components/Footer";
+import Slider from "../components/Slider";
 import "../App.css";
-import Section from "./Section";
-import Footer from "./Footer";
-import Slider from "./Slider";
 
 function Home() {
   return (

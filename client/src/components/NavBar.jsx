@@ -21,7 +21,13 @@ const NavBar = () => {
               className="text-end btn btn-light"
               onClick={() => history.push("/SignUp")}
             >
-              <Nav.Link className="text-end fs-5">SignUP</Nav.Link>
+              <Nav.Link className="text-end fs-5">SignUP/Login</Nav.Link>
+            </button>
+            <button
+              className="text-end btn btn-light"
+              onClick={() => history.push("/Users")}
+            >
+              <Nav.Link className="text-end fs-5">CRUD OPERATIONS</Nav.Link>
             </button>
           </Nav>
         </Navbar.Collapse>

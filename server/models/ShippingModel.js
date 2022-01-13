@@ -1,23 +1,22 @@
 const mongoose = require("mongoose");
 
-const SignUpTemplate = new mongoose.Schema({
-  firstName: {
+const AddressTemplate = new mongoose.Schema({
+  address: {
     type: String,
     required: true,
   },
-  lastName: {
+  city: {
     type: String,
     required: true,
   },
-  email: {
+  postalCode: {
     type: String,
     required: true,
-    unique: true,
   },
-  password: {
+  country: {
     type: String,
     required: true,
   },
 });
 
-module.exports = mongoose.model("Users", SignUpTemplate);
+module.exports = mongoose.model("ShippingAdress", AddressTemplate);

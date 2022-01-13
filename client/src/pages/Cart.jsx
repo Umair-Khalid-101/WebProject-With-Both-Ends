@@ -1,8 +1,8 @@
 import React from "react";
-import Navbar from "./NavBar";
+import Navbar from "../components/NavBar";
 import Badge from "@material-ui/core/Badge";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import Footer from "./Footer";
+import Footer from "../components/Footer";
 import { useHistory } from "react-router";
 
 const Cart = ({ product, counter }) => {

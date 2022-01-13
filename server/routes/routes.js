@@ -2,7 +2,9 @@ const express = require("express");
 const router = express.Router();
 const copy = require("../models/SignUpModel");
 const cart = require("../models/CartModel");
+const shipment = require("../models/ShippingModel");
 
+// POST ROUTES
 router.post("/SignUp", (request, response) => {
   const signedUpUser = new copy({
     firstName: request.body.firstName,
@@ -38,6 +40,24 @@ router.post("/Products", (request, response) => {
     });
 });
 
+router.post("/ShippingForm", (request, response) => {
+  const newshipment = new shipment({
+    address: request.body.address,
+    city: request.body.city,
+    postalCode: request.body.postalCode,
+    country: request.body.country,
+  });
+  newshipment
+    .save()
+    .then((data) => {
+      response.json(data);
+    })
+    .catch((error) => {
+      response.json(error);
+    });
+});
+
+// DELETE ROUTES
 router.delete("/User/:id", (request, response) => {
   copy
     .deleteOne({ _id: request.params.id })
@@ -47,6 +67,7 @@ router.delete("/User/:id", (request, response) => {
     .catch((error) => console.log(error));
 });
 
+// UPDATE ROUTES
 router.put("User/:id", (request, response) => {
   copy
     .updateOne(
@@ -66,6 +87,61 @@ router.put("User/:id", (request, response) => {
     .catch((error) => console.log(error));
 });
 
+router.put("/updateUser/:id", async (request, response) => {
+  const { name, registrationNumber } = request.body;
+
+  const update = await copy
+    .findByIdAndUpdate(
+      request.params.id,
+      {
+        $set: {
+          firstName: request.body.firstName,
+          lastName: request.body.lastName,
+          email: request.body.email,
+          password: request.body.password,
+        },
+      },
+      { new: true }
+    )
+    .then((data) => {
+      console.log("Data Saved");
+      response.json(data);
+    })
+    .catch((error) => {
+      response.json(error);
+    });
+});
+
+// GET ROUTES
+router.get("/Products", function (req, res) {
+  cart
+    .find()
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((error) => console.log(error));
+});
+
+router.get("/user/:id", function (req, res) {
+  copy
+    .findById(req.params.id)
+    .then((data) => {
+      console.log("Data by ID Fetched");
+      res.json(data);
+    })
+    .catch((error) => console.log(error));
+});
+
+router.get("/Success/:id", function (req, res) {
+  copy
+    .findById(req.params.id)
+    .then((data) => {
+      console.log("Data by ID Fetched");
+      res.json(data);
+    })
+    .catch((error) => console.log(error));
+});
+
 router.get("/users", function (req, res) {
   copy
     .find()
@@ -74,8 +150,9 @@ router.get("/users", function (req, res) {
     })
     .catch((error) => console.log(error));
 });
-router.get("/Products", function (req, res) {
-  cart
+
+router.get("/shipmentAddress", function (req, res) {
+  shipment
     .find()
     .then((data) => {
       res.json(data);

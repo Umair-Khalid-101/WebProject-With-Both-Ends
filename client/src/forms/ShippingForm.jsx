@@ -1,9 +1,10 @@
 import { Formik, Form } from "formik";
 import { TextField } from "./TextField";
 import * as Yup from "yup";
-// import { useHistory } from "react-router";
+import { useHistory } from "react-router";
 import Navbar from "../components/NavBar";
 import Footer from "../components/Footer";
+import axios from "axios";
 
 const validation = Yup.object().shape({
   address: Yup.mixed().required("Address is Required"),
@@ -13,7 +14,7 @@ const validation = Yup.object().shape({
 });
 
 function ShippingForm() {
-  // const history = useHistory();
+  const history = useHistory();
   return (
     <>
       <Navbar />
@@ -32,6 +33,13 @@ function ShippingForm() {
             validationSchema={validation}
             onSubmit={(values) => {
               console.log(values);
+              axios
+                .post("http://localhost:3001/app/ShippingForm", values)
+                .then((response) => console.log(response.data));
+
+                setTimeout(() => {
+                  history.push(`/Success/${values._id}`);
+                }, 3000);
             }}
           >
             <Form>
@@ -48,7 +56,10 @@ function ShippingForm() {
                 <TextField label="Country" name="country" type="text" />
                 <TextField label="Postal Code" name="postalCode" type="text" />
                 <div className="text-center">
-                  <button className="btn btn-primary mb-5 mt-4" type="submit">
+                  <button
+                    className="btn btn-primary mb-5 mt-4"
+                    type="submit"
+                  >
                     <h5 className="fw-bold">SHIP ORDER</h5>
                   </button>
                 </div>

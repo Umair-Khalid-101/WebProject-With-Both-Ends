@@ -9,16 +9,6 @@ import axios from "axios";
 import React from "react";
 
 const validation = Yup.object().shape({
-  firstName: Yup.string()
-    .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field ")
-    .required("First Name is Required")
-    .max(15, "First Name cannot be bigger than 15 characters")
-    .min(3, "First Name cannot be smaller than 3 characters"),
-  lastName: Yup.string()
-    .required("Last Name is Required")
-    .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field ")
-    .max(15, "Last Name cannot be bigger than 15 characters")
-    .min(3, "Last Name cannot be smaller than 3 characters"),
   email: Yup.string().email("Invalid Email").required("Email is required"),
   password: Yup.string()
     .required("Password is required")
@@ -37,8 +27,6 @@ function SignUp({ handleStateChange, data }) {
         >
           <Formik
             initialValues={{
-              firstName: "",
-              lastName: "",
               email: "",
               password: "",
             }}
@@ -52,6 +40,7 @@ function SignUp({ handleStateChange, data }) {
               axios
                 .post("http://localhost:3001/app/SignUp", values)
                 .then((response) => console.log(response.data));
+              window.location.reload();
             }}
           >
             <Form>
@@ -62,26 +51,21 @@ function SignUp({ handleStateChange, data }) {
                   marginTop: "40px",
                 }}
               >
-                <h4 className="text-center">SIGN UP</h4>
-                <TextField label="First Name" name="firstName" type="text" />
-                <TextField label="Last Name" name="lastName" type="text" />
+                <h4 className="text-center">Login</h4>
                 <TextField label="Email" name="email" type="text" />
                 <TextField label="Password" name="password" type="password" />
                 <div className="text-center">
-                  <button
-                    className="btn btn-primary mb-1 mt-4"
-                    type="submit"
-                    onClick={() => {
-                      setTimeout(() => {
-                        history.push("/Login");
-                      }, 3000);
-                    }}
-                  >
-                    Sign Up
-                  </button>
-                  <h5 className="mb-5 mt-3">
-                    Already a member? <Link to="/Login">Login</Link>
+                  <h5 className="mt-4">
+                    Not a user? <Link to="/SignUp">SignUp</Link>
                   </h5>
+                  <Link to="/Products">
+                    <button
+                      className="btn btn-success ms-4 mb-5 mt-2"
+                      type="submit"
+                    >
+                      Login
+                    </button>
+                  </Link>
                 </div>
               </div>
             </Form>
